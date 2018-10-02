@@ -1,21 +1,92 @@
-var lyrics = [
-  "Artic Monkeys",
-  "Morphine",
-  "Rolling Stones",
-  "Adele",
-  "Florence and the Machine",
-  "Frank Sinatra"
-];
+var quiz = document.getElementById("question");
+function Question(question, answer, correct) {
+  this.question = question;
+  this.answer = answer;
+  this.correct = correct;
+}
 
-var request = new XMLHttpRequest();
+var q1 = new Question(
+  "Now the drugs don´t work",
+  [
+    "The Verve",
+    "Oasis",
+    "Adele",
+    "Rolling Stones",
+    "Chris de Burgh",
+    "Ceasars"
+  ],
+  0
+);
+
+var q2 = new Question(
+  "Go your own way",
+  [
+    "The Chemical Brothers",
+    "U2",
+    "The Doors",
+    "Fleetwood Mac",
+    "Moloko",
+    "The Beatles"
+  ],
+  3
+);
+
+var q3 = new Question(
+  "It's now or never",
+  [
+    "Radiohead",
+    "A-Ha",
+    "Mac Davis",
+    "Rückwater",
+    "Queens of the Stone Age",
+    "Elvis Presley"
+  ],
+  5
+);
+var q4 = new Question(
+  "It's now or never",
+  [
+    "Radiohead",
+    "A-Ha",
+    "Mac Davis",
+    "Rückwater",
+    "Queens of the Stone Age",
+    "Elvis Presley"
+  ],
+  5
+);
+var q5 = new Question(
+  "It's now or never",
+  [
+    "Radiohead",
+    "A-Ha",
+    "Mac Davis",
+    "Rückwater",
+    "Queens of the Stone Age",
+    "Elvis Presley"
+  ],
+  5
+);
+var q6 = new Question(
+  "It's now or never",
+  [
+    "Radiohead",
+    "A-Ha",
+    "Mac Davis",
+    "Rückwater",
+    "Queens of the Stone Age",
+    "Elvis Presley"
+  ],
+  5
+);
+var questions = [q1, q2, q3, q4, q5, q6];
+
 var boxMusic = document.querySelectorAll(".boxMusic");
 var colors = generateRandomColors(6);
 for (var i = 0; i < boxMusic.length; i++) {
-  boxMusic[i].textContent = lyrics[i];
+  boxMusic[i].textContent = questions[i].question;
   boxMusic[i].style.backgroundColor = colors[i];
 }
-
-request.open("GET", "https://ghibliapi.herokuapp.com/films", true);
 
 function generateRandomColors(num) {
   //make an array
