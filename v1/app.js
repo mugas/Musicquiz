@@ -1,9 +1,13 @@
-var quiz = document.getElementById("question");
 function Question(question, answer, correct) {
   this.question = question;
   this.answer = answer;
   this.correct = correct;
 }
+var quiz = document.getElementById("question");
+Question.prototype.displayQuestion = function() {
+  console.log(this.question);
+  console.log(this.answer);
+};
 
 var q1 = new Question(
   "Now the drugs don´t work",
@@ -80,6 +84,14 @@ var q6 = new Question(
   5
 );
 var questions = [q1, q2, q3, q4, q5, q6];
+
+function nextQuestion() {
+  var n = Math.floor(Math.random() * questions.length);
+
+  quiz.textContent = questions[n].displayQuestion();
+}
+
+nextQuestion();
 
 var boxMusic = document.querySelectorAll(".boxMusic");
 var colors = generateRandomColors(6);
