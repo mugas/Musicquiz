@@ -8,7 +8,8 @@ var musicQuiz = [
       "Rolling Stones",
       "Chris de Burgh",
       "Ceasars"
-    ]
+    ],
+    correctAnswer: 0
   },
   {
     lyrics: "Go your own way",
@@ -19,20 +20,26 @@ var musicQuiz = [
       "Fleetwood Mac",
       "Moloko",
       "The Beatles"
-    ]
+    ],
+    correctAnswer: 3
   }
 ];
 
 for (var i = 0; i < musicQuiz.length; i++) {
   var question = document.getElementById("question");
-  var random = Math.floor(Math.random() * musicQuiz[i].lyrics.length);
-  question.textContent = musicQuiz[i].lyrics[random];
+  var boxMusic = document.querySelectorAll(".boxMusic");
+  var random = Math.floor(Math.random() * musicQuiz.length);
+  question.textContent = musicQuiz[random].lyrics;
+  console.log(boxMusic);
 }
 
-var boxMusic = document.querySelectorAll(".boxMusic");
+//var boxMusic = document.querySelectorAll(".boxMusic");
 var colors = generateRandomColors(6);
 for (var i = 0; i < boxMusic.length; i++) {
+  var boxMusic = document.querySelectorAll(".boxMusic");
+  var q = [0, 1, 12, 3, 4, 5];
   boxMusic[i].style.backgroundColor = colors[i];
+  boxMusic.textContent = q;
 }
 
 function generateRandomColors(num) {
