@@ -24,22 +24,22 @@ var musicQuiz = [
     correctAnswer: 3
   }
 ];
-
+var question = document.getElementById("question");
+var boxMusic = document.querySelectorAll(".boxMusic");
 for (var i = 0; i < musicQuiz.length; i++) {
-  var question = document.getElementById("question");
-  var boxMusic = document.querySelectorAll(".boxMusic");
   var random = Math.floor(Math.random() * musicQuiz.length);
   question.textContent = musicQuiz[random].lyrics;
-  console.log(boxMusic);
-}
 
+  for (var j = 0; j < musicQuiz.answers.length; j++) {
+    boxMusic.textContent = musicQuiz[random].answers;
+  }
+}
 //var boxMusic = document.querySelectorAll(".boxMusic");
 var colors = generateRandomColors(6);
 for (var i = 0; i < boxMusic.length; i++) {
   var boxMusic = document.querySelectorAll(".boxMusic");
   var q = [0, 1, 12, 3, 4, 5];
   boxMusic[i].style.backgroundColor = colors[i];
-  boxMusic.textContent = q;
 }
 
 function generateRandomColors(num) {
