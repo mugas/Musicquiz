@@ -25,15 +25,18 @@ var musicQuiz = [
   }
 ];
 var question = document.getElementById("question");
-var boxMusic = document.querySelectorAll(".boxMusic");
+var boxMusic = document.getElementsByClassName("boxMusic");
+var test = document.getElementById("container");
 for (var i = 0; i < musicQuiz.length; i++) {
   var random = Math.floor(Math.random() * musicQuiz.length);
+  var teste = musicQuiz[random].answers;
   question.textContent = musicQuiz[random].lyrics;
-
-  for (var j = 0; j < musicQuiz.answers.length; j++) {
-    boxMusic.textContent = musicQuiz[random].answers;
-  }
+  boxMusic.textContent = musicQuiz[0].answers;
 }
+for (var j = 0; j < musicQuiz.answers; j++) {
+  console.log(teste);
+}
+
 //var boxMusic = document.querySelectorAll(".boxMusic");
 var colors = generateRandomColors(6);
 for (var i = 0; i < boxMusic.length; i++) {
