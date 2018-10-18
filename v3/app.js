@@ -9,7 +9,7 @@ var musicQuiz = [
       "Chris de Burgh",
       "Ceasars"
     ],
-    correctAnswer: 0
+    correctAnswer: "The Verve"
   },
   {
     lyrics: "Go your own way",
@@ -21,28 +21,47 @@ var musicQuiz = [
       "Moloko",
       "The Beatles"
     ],
-    correctAnswer: 3
+    correctAnswer: "Fleetwood Mac"
   }
 ];
 
-var resposta = document.querySelectorAll(".respostas");
 var question = document.getElementById("question");
-var boxMusic = document.querySelectorAll("div .boxMusic");
+var possibleAnswers = document.querySelectorAll(".possibleAnswers");
 
+//show a random question
 for (var i = 0; i < musicQuiz.length; i++) {
   var random = Math.floor(Math.random() * musicQuiz.length);
-  var teste = musicQuiz[random].answers;
   question.textContent = musicQuiz[random].lyrics;
-  resposta.textContent = musicQuiz[random].answers;
+  var showPossibleAnswers = musicQuiz[random].answers;
+  //show the possible answers for the random question given
+  for (var j = 0; j < showPossibleAnswers.length; j++) {
+    for (var x = j; x < possibleAnswers.length; x++) {
+      possibleAnswers[x].innerHTML = showPossibleAnswers[j];
+      /* possibleAnswers[x].addEventListener("click", function() {
+        var clickedColor = this.possibleAnswers;
+        console.log("hello");
+      }); */
+    }
+  }
 }
-for (var j = 0; j < musicQuiz.answers; j++) {}
 
-//var boxMusic = document.querySelectorAll(".boxMusic");
+//Guessing the correct answer
+for (var x = 0; x < possibleAnswers.length; x++) {
+  possibleAnswers[x].addEventListener("click", doSomething);
+}
+var messageDisplay = document.getElementById("message");
+function doSomething(e) {
+  var correctAnswer = e.target.innerHTML;
+  console.log(e.target.innerHTML);
+  if (correctAnswer !== musicQuiz[random].correctAnswer) {
+    messageDisplay.textContent = "Play Again";
+  }
+}
+
+//generate random colors
 var colors = generateRandomColors(6);
-for (var i = 0; i < boxMusic.length; i++) {
-  var boxMusic = document.querySelectorAll(".boxMusic");
-  var q = [0, 1, 12, 3, 4, 5];
-  boxMusic[i].style.backgroundColor = colors[i];
+for (var i = 0; i < possibleAnswers.length; i++) {
+  possibleAnswers[i].style.backgroundColor = colors[i];
 }
 
 function generateRandomColors(num) {
