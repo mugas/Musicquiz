@@ -22,39 +22,78 @@ var musicQuiz = [
       "The Beatles"
     ],
     correctAnswer: "Fleetwood Mac"
+  },
+  {
+    lyrics: "Live Alone",
+    answers: [
+      "Feromona",
+      "PJ Harvey",
+      "Franz Ferdinand",
+      "Christopher Cross",
+      "Kool and the Gang",
+      "The Strokes"
+    ],
+    correctAnswer: "Franz Ferdinand"
+  },
+  {
+    lyrics: "Sing it Back",
+    answers: [
+      "Ella Fitgerald",
+      "Moloko",
+      "Da Weasel",
+      "Jonhy Cash",
+      "Joy Division",
+      "The Cure"
+    ],
+    correctAnswer: "Moloko"
+  },
+  {
+    lyrics: "Hold the Line",
+    answers: [
+      "Red Hot Chilli Peppers",
+      "The Cure",
+      "The Streets",
+      "Toto",
+      "Peter Gabriel",
+      "Dean Martin"
+    ],
+    correctAnswer: "Toto"
   }
 ];
 
 var question = document.getElementById("question");
 var possibleAnswers = document.querySelectorAll(".possibleAnswers");
+var random = Math.floor(Math.random() * musicQuiz.length);
+var showPossibleAnswers = musicQuiz[random].answers;
 
-//show a random question
-for (var i = 0; i < musicQuiz.length; i++) {
-  var random = Math.floor(Math.random() * musicQuiz.length);
-  question.textContent = musicQuiz[random].lyrics;
-  var showPossibleAnswers = musicQuiz[random].answers;
-  //show the possible answers for the random question given
-  for (var j = 0; j < showPossibleAnswers.length; j++) {
-    for (var x = j; x < possibleAnswers.length; x++) {
-      possibleAnswers[x].innerHTML = showPossibleAnswers[j];
-      /* possibleAnswers[x].addEventListener("click", function() {
-        var clickedColor = this.possibleAnswers;
-        console.log("hello");
-      }); */
+function showQuestion() {
+  //show a random question
+  for (var i = 0; i < musicQuiz.length; i++) {
+    question.textContent = musicQuiz[random].lyrics;
+    //show the possible answers for the random question given
+    for (var j = 0; j < showPossibleAnswers.length; j++) {
+      for (var x = j; x < possibleAnswers.length; x++) {
+        possibleAnswers[x].innerHTML = showPossibleAnswers[j];
+      }
     }
   }
 }
-
+showQuestion();
 //Guessing the correct answer
 for (var x = 0; x < possibleAnswers.length; x++) {
+  var answeredQuestions = [];
   possibleAnswers[x].addEventListener("click", doSomething);
 }
+
 var messageDisplay = document.getElementById("message");
 function doSomething(e) {
   var correctAnswer = e.target.innerHTML;
   console.log(e.target.innerHTML);
   if (correctAnswer !== musicQuiz[random].correctAnswer) {
     messageDisplay.textContent = "Play Again";
+  } else {
+    showQuestion();
+    answeredQuestions.push(correctAnswer);
   }
 }
 
