@@ -12,5 +12,7 @@ To do:
 
 Add score
 Choose next question
+Make website responsive
+
 
 
