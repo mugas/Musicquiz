@@ -61,6 +61,13 @@ var musicQuiz = [
   }
 ];
 
+function teste() {
+  for (var x = 0; x < musicQuiz.length; x++) {
+    //questions.textContent = musicQuiz[x].lyrics)
+    question.textContent = musicQuiz[x].lyrics;
+  }
+}
+
 var question = document.getElementById("question");
 var possibleAnswers = document.querySelectorAll(".possibleAnswers");
 var random = Math.floor(Math.random() * musicQuiz.length);
@@ -79,6 +86,7 @@ function showQuestion() {
   }
 }
 showQuestion();
+
 //Guessing the correct answer
 for (var x = 0; x < possibleAnswers.length; x++) {
   var answeredQuestions = [];
@@ -90,9 +98,10 @@ function doSomething(e) {
   var correctAnswer = e.target.innerHTML;
   console.log(e.target.innerHTML);
   if (correctAnswer !== musicQuiz[random].correctAnswer) {
-    messageDisplay.textContent = "Play Again";
+    //messageDisplay.textContent = "Play Again";
+    teste();
   } else {
-    showQuestion();
+    //showQuestion();
     answeredQuestions.push(correctAnswer);
   }
 }
