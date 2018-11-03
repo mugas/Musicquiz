@@ -61,60 +61,70 @@ var musicQuiz = [
   }
 ];
 
+function Quiz(questions) {
+  this.score = 0;
+  this.questions = questions;
+  this.QuestionIndex = 0;
+}
+
+Quiz.prototype.getQuestionIndex = function() {
+  return this.questions[this.QuestionIndex];
+};
+
+Quiz.prototype.isEndend = function() {
+  return (this.questions.length = this.QuestionIndex);
+};
+
+Quiz.prototype.guess = function(answer) {
+  if (this.getQuestionIndex().correctAnswer(answer)) {
+    this.score++;
+  }
+};
+
+function Question(text, choices, answer) {
+  this.text = text;
+  this.choices = choices;
+  this.answer = answer;
+}
+
+Question.prototype.correctAnswer = function(choice) {
+  return choice === this.answer;
+};
+
+function populate() {
+  if (quiz.isEndend()) {
+    showScores();
+  } else {
+    //show question
+    var element = document.getElementById("question");
+    element.innerHTML = Quiz.getQuestionIndex().text;
+
+    //show possible choices
+    var choices = Quiz.getQuestionIndex().choices;
+    for (var i = 0; i < choices.length; i++) {
+      var element = document.getElementById("possibleAnswers" + i);
+      element.innerHTML = choices[i];
+      guess("btn" + i, choices[i]);
+    }
+    showProgress();
+  }
+}
+
 var numSquares = 6;
 var colors = [];
-var squares = document.querySelectorAll(".possibleAnswers");
+var squares = document.querySelectorAll(".square");
 var pickedColor;
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
-var question = document.getElementById("question");
-var possibleAnswers = document.querySelectorAll(".possibleAnswers");
-var random = Math.floor(Math.random() * musicQuiz.length);
-var showPossibleAnswers = musicQuiz[random].answers;
-var teste = document.querySelectorAll("button");
 
 init();
 function init() {
-  showQuestions();
   setupModeButtons();
   setupSquares();
   reset();
 }
-
-function showQuestions() {
-  for (var i = 0; i < musicQuiz.length; i++) {
-    console.log(musicQuiz[i].lyrics);
-    //question.textContent = musicQuiz[i].lyrics;
-    //var showPossibleAnswers = musicQuiz[random].answers;
-    //question.textContent = musicQuiz[i].lyrics;
-    for (var j = 0; j < showPossibleAnswers.length; j++) {
-      for (var x = j; x < possibleAnswers.length; x++) {
-        //showPossibleAnswers.addEventListener("click", function() {
-        question.textContent = musicQuiz[random].lyrics;
-        possibleAnswers[x].innerHTML = showPossibleAnswers[j];
-        // teste.addEventListener("click", function() {
-        //   console.log(showPossibleAnswers);
-        // });
-      }
-    }
-    return question.textContent;
-  }
-}
-
-function nextQuestion() {
-  for (var k = 0; k < teste.length; k++) {
-    teste[k].addEventListener("click", function() {
-      question.textContent = musicQuiz[random].lyrics;
-      //possibleAnswers[x].innerHTML = showPossibleAnswers[j];
-      console.log(showPossibleAnswers);
-    });
-  }
-}
-
-showQuestions();
-nextQuestion();
 
 function setupModeButtons() {
   //mode buttons event listener
@@ -165,7 +175,7 @@ function reset() {
   //pick a new random color from array
   pickedColor = pickColor();
   //change color display to match picked color
-  //colorDisplay.textContent = pickedColor;
+
   resetButton.textContent = "New Colors";
   messageDisplay.textContent = "";
   //change colors of squares
@@ -181,7 +191,6 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-  showQuestions();
   reset();
 });
 
