@@ -1,7 +1,7 @@
-var musicQuiz = [
-  {
-    lyrics: "Now the drugs don´t work",
-    answers: [
+var questions = [
+  new Question(
+    "Now the drugs don´t work",
+    [
       "The Verve",
       "Oasis",
       "Adele",
@@ -9,11 +9,11 @@ var musicQuiz = [
       "Chris de Burgh",
       "Ceasars"
     ],
-    correctAnswer: "The Verve"
-  },
-  {
-    lyrics: "Go your own way",
-    answers: [
+    "The Verve"
+  ),
+  new Question(
+    "Go your own way",
+    [
       "The Chemical Brothers",
       "U2",
       "The Doors",
@@ -21,11 +21,11 @@ var musicQuiz = [
       "Moloko",
       "The Beatles"
     ],
-    correctAnswer: "Fleetwood Mac"
-  },
-  {
-    lyrics: "Live Alone",
-    answers: [
+    "Fleetwood Mac"
+  ),
+  new Question(
+    "Live Alone",
+    [
       "Feromona",
       "PJ Harvey",
       "Franz Ferdinand",
@@ -33,11 +33,11 @@ var musicQuiz = [
       "Kool and the Gang",
       "The Strokes"
     ],
-    correctAnswer: "Franz Ferdinand"
-  },
-  {
-    lyrics: "Sing it Back",
-    answers: [
+    "Franz Ferdinand"
+  ),
+  new Question(
+    "Sing it Back",
+    [
       "Ella Fitgerald",
       "Moloko",
       "Da Weasel",
@@ -45,11 +45,11 @@ var musicQuiz = [
       "Joy Division",
       "The Cure"
     ],
-    correctAnswer: "Moloko"
-  },
-  {
-    lyrics: "Hold the Line",
-    answers: [
+    "Moloko"
+  ),
+  new Question(
+    "Hold the Line",
+    [
       "Red Hot Chilli Peppers",
       "The Cure",
       "The Streets",
@@ -57,8 +57,8 @@ var musicQuiz = [
       "Peter Gabriel",
       "Dean Martin"
     ],
-    correctAnswer: "Toto"
-  }
+    "Toto"
+  )
 ];
 
 function Quiz(questions) {
@@ -71,7 +71,7 @@ Quiz.prototype.getQuestionIndex = function() {
   return this.questions[this.QuestionIndex];
 };
 
-Quiz.prototype.isEndend = function() {
+Quiz.prototype.isEnded = function() {
   return (this.questions.length = this.QuestionIndex);
 };
 
@@ -92,12 +92,12 @@ Question.prototype.correctAnswer = function(choice) {
 };
 
 function populate() {
-  if (quiz.isEndend()) {
+  if (quiz.isEnded()) {
     showScores();
   } else {
     //show question
     var element = document.getElementById("question");
-    element.innerHTML = Quiz.getQuestionIndex().text;
+    element.innerHTML = quiz.getQuestionIndex().text;
 
     //show possible choices
     var choices = Quiz.getQuestionIndex().choices;
@@ -109,6 +109,35 @@ function populate() {
     showProgress();
   }
 }
+
+function guess(id, guess) {
+  var button = document.getElementById(id);
+  button.onclick = function() {
+    quiz.guess(guess);
+    populate();
+  };
+}
+
+function showProgress() {
+  var currentQuestionNumber = quiz.QuestionIndex + 1;
+  var element = document.getElementById("progress");
+  element.innerHTML =
+    "Question" + currentQuestionNumber + " of " + quiz.questions.length;
+}
+
+function showScores() {
+  var gameOverHtml = "<h1>Result</h1>";
+  gameOverHtml +=
+    "<h2 id='score' style='margin-top:130px;'> Your scores: " +
+    quiz.score +
+    " out of " +
+    quiz.questions.length +
+    "</h2>";
+  element.innerHTML = gameOverHtml;
+}
+
+var quiz = new Quiz(questions);
+populate();
 
 var numSquares = 6;
 var colors = [];
