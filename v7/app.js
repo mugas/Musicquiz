@@ -46,3 +46,114 @@ function populate() {
     showProgress();
   }
 }
+
+function guess(id, guess) {
+  var button = document.getElementById(id);
+  button.onclick = function() {
+    quiz.guess(guess);
+    populate();
+  };
+}
+
+function showProgress() {
+  var currentQuestionNumber = quiz.QuestionIndex + 1;
+  var element = document.getElementById("progress");
+  element.innerHTML =
+    "Question" + currentQuestionNumber + " of " + quiz.questions.length;
+}
+
+function showScores() {
+  var gameOverHtml = "<h1>Result</h1>";
+  gameOverHtml +=
+    "<h2 id='score'> Your scores: " +
+    quiz.score +
+    " out of " +
+    quiz.questions.length +
+    "</h2>";
+  var element = document.getElementById("quiz");
+  element.innerHTML = gameOverHtml;
+}
+
+/* var questions = [
+  new Question(
+    "Who is the president of Czech Republic?",
+    ["Donald Trump", "Andrej Kiska", "Milos Zeman", "Angela Merkel"],
+    "Milos Zeman"
+  ),
+  new Question(
+    "The capital of Czech Republic is:",
+    ["Brno", "Ostrava", "Hradec Kralove", "Prague"],
+    "Prague"
+  ),
+  new Question(
+    "Which food is not common Czech food?",
+    ["Cevapcici", "Svickova", "Trdelnik", "Tatarak"],
+    "Cevapcici"
+  )
+]; */
+
+var questions = [
+  new Question(
+    "Now the drugs don´t work",
+    [
+      "The Verve",
+      "Oasis",
+      "Adele",
+      "Rolling Stones",
+      "Chris de Burgh",
+      "Ceasars"
+    ],
+    "The Verve"
+  ),
+  new Question(
+    "Go your own way",
+    [
+      "The Chemical Brothers",
+      "U2",
+      "The Doors",
+      "Fleetwood Mac",
+      "Moloko",
+      "The Beatles"
+    ],
+    "Fleetwood Mac"
+  ),
+  new Question(
+    "Live Alone",
+    [
+      "Feromona",
+      "PJ Harvey",
+      "Franz Ferdinand",
+      "Christopher Cross",
+      "Kool and the Gang",
+      "The Strokes"
+    ],
+    "Franz Ferdinand"
+  ),
+  new Question(
+    "Sing it Back",
+    [
+      "Ella Fitgerald",
+      "Moloko",
+      "Da Weasel",
+      "Jonhy Cash",
+      "Joy Division",
+      "The Cure"
+    ],
+    "Moloko"
+  ),
+  new Question(
+    "Hold the Line",
+    [
+      "Red Hot Chilli Peppers",
+      "The Cure",
+      "The Streets",
+      "Toto",
+      "Peter Gabriel",
+      "Dean Martin"
+    ],
+    "Toto"
+  )
+];
+
+var quiz = new Quiz(questions);
+populate();
