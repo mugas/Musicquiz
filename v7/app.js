@@ -74,24 +74,6 @@ function showScores() {
   element.innerHTML = gameOverHtml;
 }
 
-/* var questions = [
-  new Question(
-    "Who is the president of Czech Republic?",
-    ["Donald Trump", "Andrej Kiska", "Milos Zeman", "Angela Merkel"],
-    "Milos Zeman"
-  ),
-  new Question(
-    "The capital of Czech Republic is:",
-    ["Brno", "Ostrava", "Hradec Kralove", "Prague"],
-    "Prague"
-  ),
-  new Question(
-    "Which food is not common Czech food?",
-    ["Cevapcici", "Svickova", "Trdelnik", "Tatarak"],
-    "Cevapcici"
-  )
-]; */
-
 var questions = [
   new Question(
     "Now the drugs don´t work",
@@ -157,3 +139,9 @@ var questions = [
 
 var quiz = new Quiz(questions);
 populate();
+
+var agora = document.querySelector(".test");
+
+agora.addEventListener("click", function() {
+  location.reload();
+});
