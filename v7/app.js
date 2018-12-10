@@ -71,7 +71,15 @@ function showScores() {
     quiz.questions.length +
     "</h2>";
   var element = document.getElementById("quiz");
-  element.innerHTML = gameOverHtml;
+  if (quiz.score >= 1 && quiz.score <= 2) {
+    element.innerHTML = gameOverHtml + "You can do better";
+  } else if (quiz.score > 2 && quiz.score <= 4) {
+    element.innerHTML = gameOverHtml + "You know your music";
+  } else if (quiz.score === 5) {
+    element.innerHTML = gameOverHtml + "You are a wizard of music";
+  } else {
+    element.innerHTML = gameOverHtml + "Do you even listen to music?";
+  }
 }
 
 var questions = [
