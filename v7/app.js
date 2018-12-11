@@ -69,7 +69,9 @@ function showScores() {
     quiz.score +
     " out of " +
     quiz.questions.length +
-    "</h2>";
+    "</h2>" +
+    "<button onclick='restart()'>Restart</button>";
+
   var element = document.getElementById("quiz");
   if (quiz.score >= 1 && quiz.score <= 2) {
     element.innerHTML = gameOverHtml + "You can do better";
@@ -148,8 +150,23 @@ var questions = [
 var quiz = new Quiz(questions);
 populate();
 
-var agora = document.querySelector(".test");
+var agora = document.querySelector(".restart");
 
-agora.addEventListener("click", function() {
+/* agora.addEventListener("click", function() {
   location.reload();
+}); */
+
+function restart() {
+  location.reload();
+}
+agora.addEventListener("click", restart);
+
+//Random Color
+/* 
+var buttonss = document.querySelectorAll(".buttons");
+
+buttonss.forEach(function(color) {
+  color.= "red";
+  console.log(color);
 });
+ */
