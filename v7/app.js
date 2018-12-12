@@ -63,24 +63,16 @@ function showProgress() {
 }
 
 function showScores() {
-  var gameOverHtml = "<h1>Result</h1>";
-  gameOverHtml +=
-    "<h2 id='score'> Your scores: " +
-    quiz.score +
-    " out of " +
-    quiz.questions.length +
-    "</h2>" +
-    "<button onclick='restart()'>Restart</button>";
+  var message = document.querySelector("#message");
 
-  var element = document.getElementById("quiz");
   if (quiz.score >= 1 && quiz.score <= 2) {
-    element.innerHTML = gameOverHtml + "You can do better";
+    message.textContent = "You can do better";
   } else if (quiz.score > 2 && quiz.score <= 4) {
-    element.innerHTML = gameOverHtml + "You know your music";
+    message.textContent = "You know your music";
   } else if (quiz.score === 5) {
-    element.innerHTML = gameOverHtml + "You are a wizard of music";
+    message.textContent = "You are a wizard of music";
   } else {
-    element.innerHTML = gameOverHtml + "Do you even listen to music?";
+    message.textContent = "Do you even listen to music?";
   }
 }
 
