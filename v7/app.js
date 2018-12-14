@@ -1,3 +1,39 @@
+
+//Random Colors(rgb) in buttons
+var colors = generateRandomColors(6);
+
+function changeColors(){
+  //Select all buttons
+  var buttons = document.querySelectorAll(".button");
+  //Loop thru all button to given a random color
+  for(var i = 0;i < buttons.length; i++){
+    buttons[i].style.backgroundColor = colors[i];
+  }   
+}
+
+ function generateRandomColors(num){
+   //make an array
+   var arr=[];
+   //repeat num times
+   for (var i = 0; i < num; i++){
+     arr.push(randomColor());
+   }
+   return arr;
+ }
+ 
+ function randomColor(){
+   //pick a red from 0 -255
+   var r =Math.floor(Math.random() * 256);
+   //pick a green from 0-255
+   var g =Math.floor(Math.random() * 256);
+   //pick a blue from 0-255
+   var b =Math.floor(Math.random() * 256);
+   return "rgb(" + r + "," + g + "," + b + ")";
+ }
+
+
+//Quiz Game
+
 function Quiz(questions) {
   this.score = 0;
   this.questions = questions;
@@ -13,10 +49,13 @@ Quiz.prototype.isEnded = function() {
 };
 
 Quiz.prototype.guess = function(answer) {
+  //If question is corect add one to the score and go to next question
   if (this.getQuestionIndex().correctAnswer(answer)) {
     this.score++;
+    
   }
   this.QuestionIndex++;
+  
 };
 
 function Question(text, choices, answer) {
@@ -30,9 +69,13 @@ Question.prototype.correctAnswer = function(choice) {
 };
 
 function populate() {
+  //If the quiz ended show scores
   if (quiz.isEnded()) {
     showScores();
   } else {
+    //if not
+    // every button has a different color each time
+    changeColors();
     //show question
     var element = document.getElementById("question");
     element.innerHTML = quiz.getQuestionIndex().text;
@@ -66,13 +109,13 @@ function showScores() {
   var message = document.querySelector("#message");
 
   if (quiz.score >= 1 && quiz.score <= 2) {
-    message.textContent = "You can do better";
+    message.textContent = "You can do better. You get " + quiz.score + "right";
   } else if (quiz.score > 2 && quiz.score <= 4) {
-    message.textContent = "You know your music";
+    message.textContent = "You know your music.You get " + quiz.score + "right";
   } else if (quiz.score === 5) {
-    message.textContent = "You are a wizard of music";
+    message.textContent = "You are a wizard of music.You get " + quiz.score + "right";
   } else {
-    message.textContent = "Do you even listen to music?";
+    message.textContent = "Do you even listen to music?You get " + quiz.score + "right";
   }
 }
 
@@ -153,46 +196,7 @@ function restart() {
 }
 agora.addEventListener("click", restart);
 
-//Random Color
-
-var colors = generateRandomColors(6);
-var buttons = document.querySelectorAll(".button");
-//var pickedColor = pickColor();
-/* 
- buttons.forEach(function(color) {
-  buttons[i].style.backgroundColor = colors[i];
-  console.log(color);
-});  */
- 
- for(var i = 0;i < buttons.length; i++){
-  
-  buttons[i].style.backgroundColor = colors[i];
-}   
 
 
 
-function pickColor(){
- var random  = Math.floor(Math.random() * colors.length)
- return colors[random];
-} 
 
-function generateRandomColors(num){
-  //make an array
-  var arr=[];
-  //repeat num times
-  for (var i = 0; i < num; i++){
-    arr.push(randomColor());
-  }
-  return arr;
-}
-
-function randomColor(){
-  //pick a red from 0 -255
-  var r =Math.floor(Math.random() * 256);
-  //pick a green from 0-255
-  var g =Math.floor(Math.random() * 256);
-  //pick a blue from 0-255
-  var b =Math.floor(Math.random() * 256);
-  return "rgb(" + r + "," + g + "," + b + ")";
-
-}
