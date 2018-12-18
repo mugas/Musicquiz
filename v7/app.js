@@ -1,10 +1,10 @@
 
 //Random Colors(rgb) in buttons
 var colors = generateRandomColors(6);
-
+var buttons = document.querySelectorAll(".button");
 function changeColors(){
   //Select all buttons
-  var buttons = document.querySelectorAll(".button");
+
   //Loop thru all button to given a random color
   for(var i = 0;i < buttons.length; i++){
     buttons[i].style.backgroundColor = colors[i];
@@ -41,6 +41,9 @@ function Quiz(questions) {
 }
 
 Quiz.prototype.getQuestionIndex = function() {
+
+ 
+
   return this.questions[this.QuestionIndex];
 };
 
@@ -72,13 +75,19 @@ function populate() {
   //If the quiz ended show scores
   if (quiz.isEnded()) {
     showScores();
+    for(var i = 0; i < buttons.length; i++ ){
+      buttons[i].style.backgroundColor="grey";
+    }
   } else {
     //if not
     // every button has a different color each time
     changeColors();
     //show question
+    
+
     var element = document.getElementById("question");
-    element.innerHTML = quiz.getQuestionIndex().text;
+   
+    element.innerHTML = '"' + quiz.getQuestionIndex().text + '"';
     //show choices
     var choices = quiz.getQuestionIndex().choices;
     for (var i = 0; i < choices.length; i++) {
@@ -102,20 +111,25 @@ function showProgress() {
   var currentQuestionNumber = quiz.QuestionIndex + 1;
   var element = document.getElementById("progress");
   element.innerHTML =
-    "Question" + currentQuestionNumber + " of " + quiz.questions.length;
+    "Question" +" " + currentQuestionNumber + " of " + quiz.questions.length;
 }
 
 function showScores() {
-  var message = document.querySelector("#message");
+  var scoreResult = document.querySelector(".scoreResult");
+ 
 
   if (quiz.score >= 1 && quiz.score <= 2) {
-    message.textContent = "You can do better. You get " + quiz.score + "right";
+    scoreResult.style.color = "blue";
+    scoreResult.textContent = "You can do better. You get " + quiz.score + " right out of "  + questions.length;
   } else if (quiz.score > 2 && quiz.score <= 4) {
-    message.textContent = "You know your music.You get " + quiz.score + "right";
+    scoreResult.style.color = "yellow";
+    scoreResult.textContent = "You know your music.You get " + quiz.score + " right out of " + questions.length;
   } else if (quiz.score === 5) {
-    message.textContent = "You are a wizard of music.You get " + quiz.score + "right";
+    scoreResult.style.color = "green";
+    scoreResult.textContent = "You are a wizard of music.You get " + quiz.score + " right out of " + questions.length;
   } else {
-    message.textContent = "Do you even listen to music?You get " + quiz.score + "right";
+    scoreResult.style.color = "red";
+    scoreResult .textContent = "Do you even listen to music?You get " + quiz.score + " right out of " + questions.length;
   }
 }
 
